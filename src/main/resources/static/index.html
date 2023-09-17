@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset = "UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Spring Boot API</title>
+    <style>
+        /* Add CSS styles here to format the data */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #666;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script>
+        function fetchData() {
+            // Make an AJAX request to the Spring Boot API
+            fetch('/boats')
+                .then(response => response.json()) // Assuming the API returns JSON
+                .then(data => {
+                    // Display the data in a new popup window
+                    const popup = window.open('', 'Popup', 'width=800,height=600');
+                    popup.document.write('<html><head><title>Data from API</title></head><body>');
+                    popup.document.write('<h2>Data from API:</h2>');
+                    popup.document.write('<table>');
+                    popup.document.write('<tr><th>Boat Name</th><th>Operating Ghat</th><th>Boat Type</th><th>Description</th><th>Owner ID</th><th>Skipper 1 ID</th><th>Skipper 2 ID</th><th>Capacity</th></tr>');
+
+                    data.forEach(item => {
+                        popup.document.write('<tr>');
+                        popup.document.write('<td>' + item.boatName + '</td>');
+                        popup.document.write('<td>' + item.operatingGhat + '</td>');
+                        popup.document.write('<td>' + item.boatType + '</td>');
+                        popup.document.write('<td>' + item.description + '</td>');
+                        popup.document.write('<td>' + item.ownerId + '</td>');
+                        popup.document.write('<td>' + item.skipper1Id + '</td>');
+                        popup.document.write('<td>' + item.skipper2Id + '</td>');
+                        popup.document.write('<td>' + item.capacity + '</td>');
+                        popup.document.write('</tr>');
+                    });
+
+                    popup.document.write('</table></body></html>');
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</head>
+<body>
+    <button onclick="fetchData()">Boat</button>
+    <button>Ghat</button>
+    <button>Persons</button>
+    <button>Customers</button>
+    <button>Reservation</button>
+    <button>Price</button>
+</body>
+</html>
